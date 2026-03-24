@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+:root {
+  --app-bg: #0c1118;
+  --app-bg-2: #0f1720;
+  --app-panel: #111a24;
+  --app-panel-2: #162131;
+  --app-panel-3: #1a2737;
+  --app-toolbar: #0f1722;
+  --app-border: rgba(148, 163, 184, 0.14);
+  --app-border-strong: rgba(148, 163, 184, 0.24);
+  --text-primary: #edf3fb;
+  --text-secondary: #a0b3ca;
+  --text-muted: #70849d;
+  --brand: #4c9fff;
+  --brand-2: #79b8ff;
+  --brand-soft: rgba(76, 159, 255, 0.14);
+  --success: #3bdc97;
+  --warning: #ffb648;
+  --danger: #ff6f6f;
+  --grid-line: rgba(148, 163, 184, 0.08);
+  --radius-lg: 18px;
+  --radius-md: 14px;
+  --shadow-panel: 0 22px 48px rgba(3, 8, 15, 0.38);
+}
+
+@theme inline {
+  --color-background: var(--app-bg);
+  --color-foreground: var(--text-primary);
+  --font-sans: var(--font-plex-sans);
+  --font-mono: var(--font-plex-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background:
+    radial-gradient(circle at top left, rgba(76, 159, 255, 0.16), transparent 24%),
+    radial-gradient(circle at top right, rgba(76, 159, 255, 0.08), transparent 18%),
+    linear-gradient(180deg, #111923 0%, #0a1018 100%);
+}
+
+body {
+  margin: 0;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-plex-sans), sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(17, 25, 38, 0.7);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(113, 132, 157, 0.35);
+  border-radius: 999px;
+}
+
+.react-grid-item > .react-resizable-handle::after {
+  border-right-color: rgba(255, 255, 255, 0.34);
+  border-bottom-color: rgba(255, 255, 255, 0.34);
+}
+
+.react-grid-layout {
+  position: relative;
+  background-image:
+    linear-gradient(to right, transparent calc(100% - 1px), var(--grid-line)),
+    linear-gradient(to bottom, transparent calc(100% - 1px), var(--grid-line));
+  background-size: calc(100% / 12) 120px;
+  border-radius: 24px;
+  padding: 6px;
+}
+
+.react-grid-layout::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 16%);
+  pointer-events: none;
+}
+
+.react-grid-item.react-grid-placeholder {
+  background: rgba(74, 168, 255, 0.14);
+  border: 1px dashed rgba(74, 168, 255, 0.5);
+  border-radius: 18px;
+}
+
+.selection-pill {
+  background: linear-gradient(180deg, rgba(18, 27, 40, 0.96), rgba(13, 21, 32, 0.96));
+  border: 1px solid var(--app-border);
+  border-radius: 12px;
+}
+
+.app-panel {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 14%),
+    linear-gradient(180deg, rgba(21, 31, 46, 0.96), rgba(14, 22, 33, 0.99));
+  border: 1px solid var(--app-border);
+  box-shadow: var(--shadow-panel);
+}
+
+.metric-glow {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 10px 26px rgba(0, 0, 0, 0.22);
+}
+
+.fb-topbar {
+  background: linear-gradient(180deg, rgba(16, 24, 35, 0.98), rgba(12, 18, 27, 0.98));
+  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.fb-toolbar-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 999px;
+  padding: 7px 12px;
+}
+
+.fb-tab {
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-secondary);
+}
+
+.fb-tab-active {
+  border-color: rgba(76, 159, 255, 0.22);
+  background: rgba(76, 159, 255, 0.12);
+  color: white;
+}

@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Dashboard {
+  id          String          @id
+  name        String
+  layoutJson  Json
+  configJson  Json
+  filtersJson Json
+  widgetsJson Json
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  views       DashboardView[]
+  comments    WidgetComment[]
+}
+
+model DashboardView {
+  id          String   @id @default(cuid())
+  dashboardId String
+  userId      String
+  layoutJson  Json
+  filtersJson Json
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  dashboard   Dashboard @relation(fields: [dashboardId], references: [id], onDelete: Cascade)
+  widgetPrefs WidgetPreference[]
+
+  @@unique([dashboardId, userId])
+}
+
+model WidgetPreference {
+  id        String   @id @default(cuid())
+  viewId    String
+  widgetId  String
+  hidden    Boolean  @default(false)
+  pinned    Boolean  @default(false)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  view      DashboardView @relation(fields: [viewId], references: [id], onDelete: Cascade)
+
+  @@unique([viewId, widgetId])
+}
+
+model WidgetComment {
+  id          String   @id
+  dashboardId String
+  widgetId    String
+  author      String
+  body        String
+  color       String
+  createdAt   DateTime @default(now())
+  dashboard   Dashboard @relation(fields: [dashboardId], references: [id], onDelete: Cascade)
+
+  @@index([dashboardId, widgetId])
+}
